@@ -1,1 +1,1 @@
-FROM idisposablegithub365/wyze-bridge:dev
+FROM ghcr.io/xaviergmail/docker-wyze-bridge:dev
