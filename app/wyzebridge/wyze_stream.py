@@ -470,6 +470,11 @@ class WyzeStream(Stream):
 
 def start_tutk_stream(uri: str, stream: StreamTuple, queue: QueueTuple, state: c_int):
     """Connect and communicate with the camera using TUTK."""
+    # Reset inherited signal handlers to prevent child from stopping MediaMTX
+    import signal
+    signal.signal(signal.SIGTERM, signal.SIG_DFL)
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
+
     was_offline = state.value == StreamStatus.OFFLINE
     state.value = StreamStatus.CONNECTING
     exit_code = StreamStatus.STOPPING
